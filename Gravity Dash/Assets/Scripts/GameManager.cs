@@ -19,6 +19,6 @@ public class GameManager : MonoBehaviour
         else
             Destroy(gameObject);
 
-        speed = playerController.speed;
+        speed = playerController.Speed;
     }
 }
