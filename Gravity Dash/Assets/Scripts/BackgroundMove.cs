@@ -5,7 +5,7 @@ using UnityEngine;
 public class BackgroundMove : MonoBehaviour
 {
     [SerializeField]
-    private float speed;
+    private PlayerController playerController;
 
 
     [SerializeField]
@@ -15,7 +15,7 @@ public class BackgroundMove : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log(backgorundSprite.size.x);
+       
         inititalPos = transform.position;
     }
     // Update is called once per frame
@@ -25,7 +25,7 @@ public class BackgroundMove : MonoBehaviour
         if (bgpos.x <= inititalPos.x - backgorundSprite.size.x)
             bgpos = inititalPos;
         else
-            bgpos.x -= speed * Time.deltaTime;
+            bgpos.x -= GameManager.Instance.speed * Time.deltaTime;
         transform.position = bgpos;
 
 
