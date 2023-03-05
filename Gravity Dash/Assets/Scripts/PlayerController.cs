@@ -24,18 +24,10 @@ public class PlayerController : MonoBehaviour
             playerRigidbody.gravityScale *= -1;
             playerSpriteRenderer.flipY = !playerSpriteRenderer.flipY;
         }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Platform"))
+        if (playerRigidbody.velocity.y != 0)
+            playerAnimator.SetBool("OnGround",false);
+        else
             playerAnimator.SetBool("OnGround", true);
-
     }
-    private void OnCollisionExit2D(Collision2D collision)
-    {
 
-        if (collision.gameObject.CompareTag("Platform"))
-            playerAnimator.SetBool("OnGround", false);
-    }
 }
