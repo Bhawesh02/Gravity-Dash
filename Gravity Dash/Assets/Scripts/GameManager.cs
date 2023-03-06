@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     private PlayerController playerController;
     [HideInInspector]
     public float speed;
+    [SerializeField]
+    private GameObject[] platforms;
     
     private void Awake()
     {
