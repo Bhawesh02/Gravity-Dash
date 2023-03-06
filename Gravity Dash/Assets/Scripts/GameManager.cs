@@ -9,10 +9,13 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private PlayerController playerController;
+    [SerializeField]
+    private List<GameObject> platforms;
+    [SerializeField]
+    private BackgroundMove backgroundMove;
+    
     [HideInInspector]
     public float speed;
-    [SerializeField]
-    private GameObject[] platforms;
     
     private void Awake()
     {
@@ -22,5 +25,13 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
 
         speed = playerController.Speed;
+    }
+
+    public void GameOver()
+    {
+        playerController.enabled = false;
+        platforms.ForEach(platform => platform.GetComponent<MoveLeft>().enabled = false) ;
+        backgroundMove.enabled = false;
+        Debug.Log("GameOver");
     }
 }
