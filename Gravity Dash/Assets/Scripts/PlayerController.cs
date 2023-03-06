@@ -49,5 +49,11 @@ public class PlayerController : MonoBehaviour
             playerSpriteRenderer.flipY = !playerSpriteRenderer.flipY;
         }
     }
+
+    public void IncreaseMass()
+    {
+        playerRigidbody.mass *= 5;
+    }
+
     
 }

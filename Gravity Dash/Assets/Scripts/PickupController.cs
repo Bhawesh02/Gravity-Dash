@@ -6,7 +6,8 @@ using UnityEngine;
 public enum PickupType
 {
     Heart,
-    Checkpoint
+    Checkpoint,
+    Meat
 }
 public class PickupController : MonoBehaviour
 {
@@ -32,6 +33,9 @@ public class PickupController : MonoBehaviour
             case PickupType.Checkpoint:
                 GameManager.Instance.RecordLastPos();
 
+                break;
+            case PickupType.Meat:
+                playerController.IncreaseMass();
                 break;
             default:
                 Debug.LogError("Pickup type not specified");
