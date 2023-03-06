@@ -49,5 +49,8 @@ public class PlayerController : MonoBehaviour
             playerSpriteRenderer.flipY = !playerSpriteRenderer.flipY;
         }
     }
+
+
+
     
 }

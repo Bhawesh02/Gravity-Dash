@@ -6,7 +6,8 @@ using UnityEngine;
 public enum PickupType
 {
     Heart,
-    Checkpoint
+    Checkpoint,
+    Meat
 }
 public class PickupController : MonoBehaviour
 {
