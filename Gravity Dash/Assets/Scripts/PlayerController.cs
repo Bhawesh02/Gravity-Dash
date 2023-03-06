@@ -6,13 +6,14 @@ public class PlayerController : MonoBehaviour
 {
     public float Speed;
     public bool OnGround;
-
+    public bool ExtraLife = false;
 
     private Rigidbody2D playerRigidbody;
 
     private SpriteRenderer playerSpriteRenderer;
 
     private Animator playerAnimator;
+
 
     private void Awake()
     {

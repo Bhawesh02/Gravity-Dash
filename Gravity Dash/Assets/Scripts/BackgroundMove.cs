@@ -26,7 +26,7 @@ public class BackgroundMove : MonoBehaviour
         if (bgpos.x <= inititalPos.x - backgorundSprite1.size.x/2 )
             bgpos = inititalPos;
         else
-            bgpos.x -= GameManager.Instance.speed * Time.deltaTime;
+            bgpos.x -= GameManager.Instance.Speed * Time.deltaTime;
         transform.position = bgpos;
 
 
