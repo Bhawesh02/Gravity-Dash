@@ -9,20 +9,21 @@ public class BackgroundMove : MonoBehaviour
 
 
     [SerializeField]
-    private SpriteRenderer backgorundSprite;
+    private SpriteRenderer backgorundSprite1;
+
 
     private Vector3 inititalPos;
 
     private void Awake()
     {
-       
         inititalPos = transform.position;
+
     }
     // Update is called once per frame
     void Update()
     {
         Vector3 bgpos = transform.position;
-        if (bgpos.x <= inititalPos.x - backgorundSprite.size.x)
+        if (bgpos.x <= inititalPos.x - backgorundSprite1.size.x/2 )
             bgpos = inititalPos;
         else
             bgpos.x -= GameManager.Instance.speed * Time.deltaTime;
