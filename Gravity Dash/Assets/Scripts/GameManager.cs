@@ -9,10 +9,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private PlayerController playerController;
-    [SerializeField]
-    private List<GameObject> platforms;
-    [SerializeField]
-    private BackgroundMove backgroundMove;
+    public List<GameObject> platforms;
+    public BackgroundMove backgroundMove;
     
     [HideInInspector]
     public float speed;
