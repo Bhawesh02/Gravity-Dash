@@ -153,6 +153,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 1599579736}
+  platforms:
+  - {fileID: 1818020478}
+  - {fileID: 507445976}
+  - {fileID: 845849615}
+  backgroundMove: {fileID: 1083247315}
   speed: 0
 --- !u!4 &150123813
 Transform:
