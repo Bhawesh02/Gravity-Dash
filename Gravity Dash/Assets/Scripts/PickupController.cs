@@ -34,6 +34,9 @@ public class PickupController : MonoBehaviour
                 GameManager.Instance.RecordLastPos();
 
                 break;
+            case PickupType.Meat:
+                playerController.IncreaseMass();
+                break;
             default:
                 Debug.LogError("Pickup type not specified");
                 break;

@@ -50,7 +50,10 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-
+    public void IncreaseMass()
+    {
+        playerRigidbody.mass *= 5;
+    }
 
     
 }
