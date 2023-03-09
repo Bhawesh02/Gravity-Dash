@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    private int increaceMassDuration = 5;
+    private int massChange = 5;
     public float Speed;
     public bool OnGround;
     public bool ExtraLife = false;
@@ -135,8 +138,13 @@ public class PlayerController : MonoBehaviour
     }
     public void IncreaseMass()
     {
-        playerRigidbody.mass *= 5;
+        playerRigidbody.mass *= massChange;
+        StartCoroutine(ReduceMass());
     }
 
-    
+    IEnumerator ReduceMass()
+    {
+        yield return new WaitForSeconds(increaceMassDuration);
+        playerRigidbody.mass /= massChange;
+    }
 }

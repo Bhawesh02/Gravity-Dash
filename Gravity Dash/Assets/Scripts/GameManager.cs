@@ -10,27 +10,22 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private PlayerController playerController;
-<<<<<<< Updated upstream
+
+
     private Rigidbody2D playerRigidBody;
     private SpriteRenderer playerSpriteRenderer;
     public List<GameObject> Platforms;
-    public Dictionary<PickupType, List<GameObject>> Pickups ;
-    public Dictionary<GameObject, Vector3> PickupsLastPos = new();
-=======
-
-
-    public List<GameObject> Platforms;
     public Dictionary<PickupType, List<GameObject>> Pickups;
->>>>>>> Stashed changes
+    public Dictionary<GameObject, Vector3> PickupsLastPos = new();
     public BackgroundMove BackgroundMove;
-    
+
     [HideInInspector]
     public float Speed;
 
-<<<<<<< Updated upstream
     private Vector3 lastPlayerPos;
 
     private List<Vector3> lastPlatformPos = new();
+
 
     private Vector3 lastBackgroundPos;
 
@@ -38,8 +33,6 @@ public class GameManager : MonoBehaviour
 
     private bool lastFlipY;
 
-=======
->>>>>>> Stashed changes
     private void Awake()
     {
         if (instance == null)
@@ -48,37 +41,32 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
 
         Speed = playerController.Speed;
+        playerRigidBody = playerController.GetComponent<Rigidbody2D>();
+        playerSpriteRenderer = playerController.GetComponent<SpriteRenderer>();
         Pickups = new();
-        foreach(PickupType type in Enum.GetValues(typeof(PickupType)))
+        foreach (PickupType type in Enum.GetValues(typeof(PickupType)))
         {
             Pickups[type] = new List<GameObject>();
         }
-<<<<<<< Updated upstream
-        for(int i=0;i<Platforms.Count;i++)
+        for (int i = 0; i < Platforms.Count; i++)
         {
             lastPlatformPos.Add(Platforms[i].transform.position);
         }
     }
 
-    public void GameOver()
+    public void PlayerDead()
     {
         if (playerController.ExtraLife)
         {
             RespawnPlayer();
             return;
         }
-        playerController.enabled = false;
-        Platforms.ForEach(platform => platform.GetComponent<MoveLeft>().enabled = false) ;
-        BackgroundMove.enabled = false;
-        
-        Debug.Log("GameOver");
-=======
-        
+        SetMoveLeft(false);
+
+        Destroy(playerController.gameObject);
     }
 
-    
-
-    public void SetMoveLeft(bool value)
+    private void SetMoveLeft(bool value)
     {
         Platforms.ForEach(platform => platform.GetComponent<MoveLeft>().enabled = value);
         BackgroundMove.enabled = value;
@@ -88,16 +76,16 @@ public class GameManager : MonoBehaviour
         }
         if (playerController != null)
             playerController.enabled = value;
->>>>>>> Stashed changes
     }
 
+    private void RespawnPlayer()
+    {
 
-<<<<<<< Updated upstream
-        
+
         BackgroundMove.gameObject.transform.position = lastBackgroundPos;
         for (int i = 0; i < Platforms.Count; i++)
         {
-             Platforms[i].transform.position = lastPlatformPos[i];
+            Platforms[i].transform.position = lastPlatformPos[i];
         }
         foreach (var type in Pickups)
         {
@@ -105,9 +93,10 @@ public class GameManager : MonoBehaviour
         }
         playerRigidBody.gravityScale = lastGravityScale;
         playerSpriteRenderer.flipY = lastFlipY;
-        playerRigidBody.velocity = new(0,0);
+        playerRigidBody.velocity = new(0, 0);
         playerController.gameObject.transform.position = lastPlayerPos;
         playerController.ExtraLife = false;
+
     }
 
     private void ReloadPickupPosition(GameObject gameObj)
@@ -119,6 +108,8 @@ public class GameManager : MonoBehaviour
 
     public void RecordLastPos()
     {
+        if (!playerController.OnGround && lastPlayerPos != Vector3.zero )
+            return;
         lastPlayerPos = playerController.gameObject.transform.position;
         lastGravityScale = playerRigidBody.gravityScale;
         lastFlipY = playerSpriteRenderer.flipY;
@@ -127,9 +118,9 @@ public class GameManager : MonoBehaviour
         {
             lastPlatformPos[i] = Platforms[i].transform.position;
         }
-        foreach(var type in Pickups)
+        foreach (var type in Pickups)
         {
-            type.Value.ForEach(gameObj =>RecordPickupPosition(gameObj));
+            type.Value.ForEach(gameObj => RecordPickupPosition(gameObj));
         }
     }
 
@@ -141,16 +132,12 @@ public class GameManager : MonoBehaviour
             PickupsLastPos[gameObj] = gameObj.transform.position;
         else
             PickupsLastPos.Add(gameObj, gameObj.transform.position);
-=======
-    
-
-    
+    }
 
 
     public void LevelOver()
     {
         SetMoveLeft(false);
         playerController.enabled = false;
->>>>>>> Stashed changes
     }
 }
