@@ -8,7 +8,7 @@ public class OutOfBoundController : MonoBehaviour
     {
         if(collision.gameObject.GetComponent<PlayerController>() != null)
         {
-            GameManager.Instance.GameOver();
+            GameManager.Instance.PlayerDead();
         }
     }
 }

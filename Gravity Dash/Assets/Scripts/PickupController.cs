@@ -41,6 +41,7 @@ public class PickupController : MonoBehaviour
                 Debug.LogError("Pickup type not specified");
                 break;
         }
+        GameManager.Instance.Pickups[type].Remove(gameObject);
         Destroy(gameObject);
     }
 }
