@@ -31,7 +31,7 @@ public class PickupController : MonoBehaviour
                 playerController.ExtraLife = true;
                 break;
             case PickupType.Checkpoint:
-                GameManager.Instance.RecordLastPos();
+                playerController.RecordLastPos();
 
                 break;
             case PickupType.Meat:

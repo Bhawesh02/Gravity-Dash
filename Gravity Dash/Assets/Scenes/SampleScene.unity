@@ -1780,6 +1780,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+<<<<<<< Updated upstream:Gravity Dash/Assets/Scenes/SampleScene.unity
+=======
+    - target: {fileID: 3398296298506839857, guid: deda3179228eadf448809c950cc39696, type: 3}
+      propertyPath: Speed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3398296298506839859, guid: deda3179228eadf448809c950cc39696, type: 3}
+      propertyPath: m_Mass
+      value: 5
+      objectReference: {fileID: 0}
+>>>>>>> Stashed changes:Gravity Dash/Assets/Scenes/Level1.unity
     - target: {fileID: 3398296298506839861, guid: deda3179228eadf448809c950cc39696, type: 3}
       propertyPath: m_RootOrder
       value: 5

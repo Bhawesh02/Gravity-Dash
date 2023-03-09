@@ -10,16 +10,24 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private PlayerController playerController;
+<<<<<<< Updated upstream
     private Rigidbody2D playerRigidBody;
     private SpriteRenderer playerSpriteRenderer;
     public List<GameObject> Platforms;
     public Dictionary<PickupType, List<GameObject>> Pickups ;
     public Dictionary<GameObject, Vector3> PickupsLastPos = new();
+=======
+
+
+    public List<GameObject> Platforms;
+    public Dictionary<PickupType, List<GameObject>> Pickups;
+>>>>>>> Stashed changes
     public BackgroundMove BackgroundMove;
     
     [HideInInspector]
     public float Speed;
 
+<<<<<<< Updated upstream
     private Vector3 lastPlayerPos;
 
     private List<Vector3> lastPlatformPos = new();
@@ -30,6 +38,8 @@ public class GameManager : MonoBehaviour
 
     private bool lastFlipY;
 
+=======
+>>>>>>> Stashed changes
     private void Awake()
     {
         if (instance == null)
@@ -38,13 +48,12 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
 
         Speed = playerController.Speed;
-        playerRigidBody = playerController.GetComponent<Rigidbody2D>();
-        playerSpriteRenderer = playerController.GetComponent<SpriteRenderer>();
         Pickups = new();
         foreach(PickupType type in Enum.GetValues(typeof(PickupType)))
         {
             Pickups[type] = new List<GameObject>();
         }
+<<<<<<< Updated upstream
         for(int i=0;i<Platforms.Count;i++)
         {
             lastPlatformPos.Add(Platforms[i].transform.position);
@@ -63,11 +72,27 @@ public class GameManager : MonoBehaviour
         BackgroundMove.enabled = false;
         
         Debug.Log("GameOver");
+=======
+        
     }
 
-    private void RespawnPlayer()
-    {
+    
 
+    public void SetMoveLeft(bool value)
+    {
+        Platforms.ForEach(platform => platform.GetComponent<MoveLeft>().enabled = value);
+        BackgroundMove.enabled = value;
+        foreach (PickupType type in Enum.GetValues(typeof(PickupType)))
+        {
+            Pickups[type].ForEach(pickup => pickup.GetComponent<MoveLeft>().enabled = value);
+        }
+        if (playerController != null)
+            playerController.enabled = value;
+>>>>>>> Stashed changes
+    }
+
+
+<<<<<<< Updated upstream
         
         BackgroundMove.gameObject.transform.position = lastBackgroundPos;
         for (int i = 0; i < Platforms.Count; i++)
@@ -116,5 +141,16 @@ public class GameManager : MonoBehaviour
             PickupsLastPos[gameObj] = gameObj.transform.position;
         else
             PickupsLastPos.Add(gameObj, gameObj.transform.position);
+=======
+    
+
+    
+
+
+    public void LevelOver()
+    {
+        SetMoveLeft(false);
+        playerController.enabled = false;
+>>>>>>> Stashed changes
     }
 }

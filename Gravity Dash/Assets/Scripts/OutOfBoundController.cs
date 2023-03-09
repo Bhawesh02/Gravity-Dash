@@ -6,9 +6,14 @@ public class OutOfBoundController : MonoBehaviour
 {
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.gameObject.GetComponent<PlayerController>() != null)
+        PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
+        if (playerController != null)
         {
+<<<<<<< Updated upstream
             GameManager.Instance.GameOver();
+=======
+            playerController.PlayerDead();
+>>>>>>> Stashed changes
         }
     }
 }
