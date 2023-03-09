@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
         Destroy(playerController.gameObject);
     }
 
-    private void SetMoveLeft(bool value)
+    public void SetMoveLeft(bool value)
     {
         Platforms.ForEach(platform => platform.GetComponent<MoveLeft>().enabled = value);
         BackgroundMove.enabled = value;
