@@ -11,7 +11,8 @@ public class PlayerController : MonoBehaviour
     public bool OnGround;
     public bool ExtraLife = false;
     public GameObject ExtraLifeIcon;
-
+    [SerializeField]
+    private GameObject playerDeadUI;
     private Rigidbody2D playerRigidbody;
 
     private SpriteRenderer playerSpriteRenderer;
@@ -25,6 +26,7 @@ public class PlayerController : MonoBehaviour
 
 
     private Vector3 lastBackgroundPos;
+    private Vector3 lastGameEndPos;
 
     private float lastGravityScale;
 
@@ -37,11 +39,16 @@ public class PlayerController : MonoBehaviour
         playerRigidbody = GetComponent<Rigidbody2D>();
         playerSpriteRenderer = GetComponent<SpriteRenderer>();
         playerAnimator = GetComponent<Animator>();
+
+    }
+    private void Start()
+    {
         for (int i = 0; i < GameManager.Instance.Platforms.Count; i++)
         {
             lastPlatformPos.Add(GameManager.Instance.Platforms[i].transform.position);
         }
     }
+
     private void Update()
     {
         GravitySwitch();
@@ -80,14 +87,13 @@ public class PlayerController : MonoBehaviour
             return;
         }
         GameManager.Instance.SetMoveLeft(false);
-
-        Destroy(gameObject);
+        playerDeadUI.SetActive(true);
     }
 
     public void RecordLastPos()
-    {/*
+    {
         if (!OnGround && lastPlayerPos != Vector3.zero)
-            return;*/
+            return;
         lastPlayerPos = gameObject.transform.position;
         lastGravityScale = playerRigidbody.gravityScale;
         lastFlipY = playerSpriteRenderer.flipY;
@@ -102,6 +108,7 @@ public class PlayerController : MonoBehaviour
         {
             type.Value.ForEach(gameObj => RecordPickupPosition(gameObj));
         }
+        lastGameEndPos = GameManager.Instance.GameEnd.transform.position;
     }
 
 
@@ -132,6 +139,8 @@ public class PlayerController : MonoBehaviour
         playerSpriteRenderer.flipY = lastFlipY;
         playerRigidbody.velocity = new(0, 0);
         gameObject.transform.position = lastPlayerPos;
+        GameManager.Instance.GameEnd.transform.position = lastGameEndPos ;
+
         ExtraLife = false;
 
     }

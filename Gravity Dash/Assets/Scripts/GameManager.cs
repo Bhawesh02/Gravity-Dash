@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,27 +12,17 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private PlayerController playerController;
 
-
-    private Rigidbody2D playerRigidBody;
-    private SpriteRenderer playerSpriteRenderer;
     public List<GameObject> Platforms;
     public Dictionary<PickupType, List<GameObject>> Pickups;
+
+
     public Dictionary<GameObject, Vector3> PickupsLastPos = new();
     public BackgroundMove BackgroundMove;
-
+    public GameObject GameEnd;
     [HideInInspector]
     public float Speed;
 
-    private Vector3 lastPlayerPos;
 
-    private List<Vector3> lastPlatformPos = new();
-
-
-    private Vector3 lastBackgroundPos;
-
-    private float lastGravityScale;
-
-    private bool lastFlipY;
 
     private void Awake()
     {
@@ -41,16 +32,10 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
 
         Speed = playerController.Speed;
-        playerRigidBody = playerController.GetComponent<Rigidbody2D>();
-        playerSpriteRenderer = playerController.GetComponent<SpriteRenderer>();
         Pickups = new();
         foreach (PickupType type in Enum.GetValues(typeof(PickupType)))
         {
             Pickups[type] = new List<GameObject>();
-        }
-        for (int i = 0; i < Platforms.Count; i++)
-        {
-            lastPlatformPos.Add(Platforms[i].transform.position);
         }
     }
 
@@ -67,7 +52,15 @@ public class GameManager : MonoBehaviour
             playerController.enabled = value;
     }
 
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 
+    public void GoToLobby()
+    {
+        SceneManager.LoadScene(0);
+    }
     public void LevelOver()
     {
         SetMoveLeft(false);
