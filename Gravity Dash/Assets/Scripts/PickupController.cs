@@ -29,6 +29,7 @@ public class PickupController : MonoBehaviour
         {
             case PickupType.Heart:
                 playerController.ExtraLife = true;
+                playerController.ExtraLifeIcon.SetActive(true);
                 break;
             case PickupType.Checkpoint:
                 playerController.RecordLastPos();

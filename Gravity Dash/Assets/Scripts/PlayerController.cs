@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public float Speed;
     public bool OnGround;
     public bool ExtraLife = false;
+    public GameObject ExtraLifeIcon;
 
     private Rigidbody2D playerRigidbody;
 
@@ -73,7 +74,9 @@ public class PlayerController : MonoBehaviour
     {
         if (ExtraLife)
         {
+
             RespawnPlayer();
+            ExtraLifeIcon.SetActive(false);
             return;
         }
         GameManager.Instance.SetMoveLeft(false);
@@ -82,13 +85,15 @@ public class PlayerController : MonoBehaviour
     }
 
     public void RecordLastPos()
-    {
+    {/*
         if (!OnGround && lastPlayerPos != Vector3.zero)
-            return;
+            return;*/
         lastPlayerPos = gameObject.transform.position;
         lastGravityScale = playerRigidbody.gravityScale;
         lastFlipY = playerSpriteRenderer.flipY;
+
         lastBackgroundPos = GameManager.Instance.BackgroundMove.gameObject.transform.position;
+        Debug.Log(lastPlayerPos+" "+ lastGravityScale + " " + lastFlipY + " " + lastBackgroundPos);
         for (int i = 0; i < GameManager.Instance.Platforms.Count; i++)
         {
             lastPlatformPos[i] = GameManager.Instance.Platforms[i].transform.position;

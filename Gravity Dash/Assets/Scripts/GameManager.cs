@@ -54,17 +54,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void PlayerDead()
-    {
-        if (playerController.ExtraLife)
-        {
-            RespawnPlayer();
-            return;
-        }
-        SetMoveLeft(false);
-
-        Destroy(playerController.gameObject);
-    }
 
     public void SetMoveLeft(bool value)
     {
@@ -76,62 +65,6 @@ public class GameManager : MonoBehaviour
         }
         if (playerController != null)
             playerController.enabled = value;
-    }
-
-    private void RespawnPlayer()
-    {
-
-
-        BackgroundMove.gameObject.transform.position = lastBackgroundPos;
-        for (int i = 0; i < Platforms.Count; i++)
-        {
-            Platforms[i].transform.position = lastPlatformPos[i];
-        }
-        foreach (var type in Pickups)
-        {
-            type.Value.ForEach(gameObj => ReloadPickupPosition(gameObj));
-        }
-        playerRigidBody.gravityScale = lastGravityScale;
-        playerSpriteRenderer.flipY = lastFlipY;
-        playerRigidBody.velocity = new(0, 0);
-        playerController.gameObject.transform.position = lastPlayerPos;
-        playerController.ExtraLife = false;
-
-    }
-
-    private void ReloadPickupPosition(GameObject gameObj)
-    {
-        if (gameObj == null)
-            return;
-        gameObj.transform.position = PickupsLastPos[gameObj];
-    }
-
-    public void RecordLastPos()
-    {
-        if (!playerController.OnGround && lastPlayerPos != Vector3.zero )
-            return;
-        lastPlayerPos = playerController.gameObject.transform.position;
-        lastGravityScale = playerRigidBody.gravityScale;
-        lastFlipY = playerSpriteRenderer.flipY;
-        lastBackgroundPos = BackgroundMove.gameObject.transform.position;
-        for (int i = 0; i < Platforms.Count; i++)
-        {
-            lastPlatformPos[i] = Platforms[i].transform.position;
-        }
-        foreach (var type in Pickups)
-        {
-            type.Value.ForEach(gameObj => RecordPickupPosition(gameObj));
-        }
-    }
-
-    private void RecordPickupPosition(GameObject gameObj)
-    {
-        if (gameObj == null)
-            return;
-        if (PickupsLastPos.ContainsKey(gameObj))
-            PickupsLastPos[gameObj] = gameObj.transform.position;
-        else
-            PickupsLastPos.Add(gameObj, gameObj.transform.position);
     }
 
 
