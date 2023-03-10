@@ -101,7 +101,6 @@ public class PlayerController : MonoBehaviour
         lastFlipY = playerSpriteRenderer.flipY;
 
         lastBackgroundPos = GameManager.Instance.BackgroundMove.gameObject.transform.position;
-        Debug.Log(lastPlayerPos+" "+ lastGravityScale + " " + lastFlipY + " " + lastBackgroundPos);
         for (int i = 0; i < GameManager.Instance.Platforms.Count; i++)
         {
             lastPlatformPos[i] = GameManager.Instance.Platforms[i].transform.position;
