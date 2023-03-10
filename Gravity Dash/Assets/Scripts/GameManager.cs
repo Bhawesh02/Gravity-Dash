@@ -61,9 +61,10 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(0);
     }
-    public void LevelOver()
+
+    public void NextLevel()
     {
-        SetMoveLeft(false);
-        playerController.enabled = false;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+    
 }

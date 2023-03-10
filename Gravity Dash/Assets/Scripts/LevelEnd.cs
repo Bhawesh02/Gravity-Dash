@@ -6,7 +6,8 @@ public class LevelEnd : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<PlayerController>() != null)
-            GameManager.Instance.LevelOver();
+        PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
+        if ( playerController!= null)
+            playerController.LevelOver();
     }
 }

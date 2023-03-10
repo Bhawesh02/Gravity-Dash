@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     public GameObject ExtraLifeIcon;
     [SerializeField]
     private GameObject playerDeadUI;
+    [SerializeField]
+    private GameObject LevelCompleteUI;
     private Rigidbody2D playerRigidbody;
 
     private SpriteRenderer playerSpriteRenderer;
@@ -155,10 +157,16 @@ public class PlayerController : MonoBehaviour
         playerRigidbody.mass *= massChange;
         StartCoroutine(ReduceMass());
     }
-
+   
     IEnumerator ReduceMass()
     {
         yield return new WaitForSeconds(increaceMassDuration);
         playerRigidbody.mass /= massChange;
+    }
+    public void LevelOver()
+    {
+        GameManager.Instance.SetMoveLeft(false);
+        LevelCompleteUI.SetActive(true);
+        this.enabled = false;
     }
 }
