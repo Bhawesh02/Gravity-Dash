@@ -13,8 +13,7 @@ public class PlayerController : MonoBehaviour
     public GameObject ExtraLifeIcon;
     [SerializeField]
     private GameObject playerDeadUI;
-    [SerializeField]
-    private GameObject LevelCompleteUI;
+    public GameObject LevelCompleteUI;
     private Rigidbody2D playerRigidbody;
 
     private SpriteRenderer playerSpriteRenderer;
