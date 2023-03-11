@@ -59,12 +59,14 @@ public class GameManager : MonoBehaviour
 
     public void GoToLobby()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(ScenesManage.GetSceneName(Scenes.Lobby));
     }
 
     public void NextLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        string currSceneName = SceneManager.GetActiveScene().name;
+        int nextSceneIndex = ((int)Enum.Parse(typeof(Scenes), currSceneName)) + 1;
+        SceneManager.LoadScene(ScenesManage.GetSceneName((Scenes)nextSceneIndex));
     }
     
 }
