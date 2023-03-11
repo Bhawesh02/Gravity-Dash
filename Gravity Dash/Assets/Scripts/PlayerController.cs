@@ -161,10 +161,4 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(increaceMassDuration);
         playerRigidbody.mass /= massChange;
     }
-    public void LevelOver()
-    {
-        GameManager.Instance.SetMoveLeft(false);
-        LevelCompleteUI.SetActive(true);
-        this.enabled = false;
-    }
 }
