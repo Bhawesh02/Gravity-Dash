@@ -19,6 +19,11 @@ public class SceneLoaded : MonoBehaviour
 
     private void ChangeScene()
     {
+        if (name == Scenes.level2 && PlayerPrefs.GetInt("Last_Level", 1) < 2)
+        {
+            Debug.Log("Locked");
+            return;
+        }
         SceneManager.LoadScene(ScenesManage.GetSceneName(name));
     }
 }
