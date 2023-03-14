@@ -28,5 +28,10 @@ public class LevelEnd : MonoBehaviour
         GameManager.Instance.SetMoveLeft(false);
         playerController.LevelCompleteUI.SetActive(true);
         playerController.enabled = false;
+        
+        if(curSceneName == ScenesManage.GetSceneName(Scenes.Level1))
+        {
+            PlayerPrefs.SetInt("Last_Level",2);
+        }
     }
 }

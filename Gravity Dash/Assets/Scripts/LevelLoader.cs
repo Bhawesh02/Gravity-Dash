@@ -6,9 +6,12 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
-public class SceneLoaded : MonoBehaviour
+public class LevelLoader : MonoBehaviour
 {
     private Button button;
+
+    [SerializeField]
+    private GameObject lockedUI;
     [SerializeField]
     private new Scenes name;
     private void Awake()
@@ -21,7 +24,7 @@ public class SceneLoaded : MonoBehaviour
     {
         if (name == Scenes.level2 && PlayerPrefs.GetInt("Last_Level", 1) < 2)
         {
-            Debug.Log("Locked");
+            lockedUI.SetActive(true);
             return;
         }
         SceneManager.LoadScene(ScenesManage.GetSceneName(name));
