@@ -6,10 +6,10 @@ public class OutOfBoundController : MonoBehaviour
 {
     private void OnTriggerExit2D(Collider2D collision)
     {
-        PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
-        if (playerController != null)
+        PlayerView playerView = collision.gameObject.GetComponent<PlayerView>();
+        if (playerView != null)
         {
-            playerController.PlayerDead();
+            playerView.Controller.PlayerDead();
         }
     }
 }

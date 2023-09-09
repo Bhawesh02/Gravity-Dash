@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 
@@ -21,22 +20,22 @@ public class PickupController : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        PlayerController playerController = collision.gameObject.GetComponent<PlayerController>();
+        PlayerView playerView = collision.gameObject.GetComponent<PlayerView>();
 
-        if (playerController == null)
+        if (playerView == null)
             return;
         switch (type)
         {
             case PickupType.Heart:
-                playerController.ExtraLife = true;
-                playerController.ExtraLifeIcon.SetActive(true);
+                playerView.ExtraLife = true;
+                playerView.ExtraLifeIcon.SetActive(true);
                 break;
             case PickupType.Checkpoint:
-                playerController.RecordLastPos();
+                playerView.Controller.RecordLastPos();
 
                 break;
             case PickupType.Meat:
-                playerController.IncreaseMass();
+                playerView.Controller.IncreaseMass();
                 break;
             default:
                 Debug.LogError("Pickup type not specified");

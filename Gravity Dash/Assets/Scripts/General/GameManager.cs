@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get { return instance; } }
 
     [SerializeField]
-    private PlayerController playerController;
+    private PlayerView playerView;
 
     public List<GameObject> Platforms;
     public Dictionary<PickupType, List<GameObject>> Pickups;
@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
         else
             Destroy(gameObject);
 
-        Speed = playerController.Speed;
+        Speed = playerView.Speed;
         Pickups = new();
         foreach (PickupType type in Enum.GetValues(typeof(PickupType)))
         {
@@ -48,8 +48,8 @@ public class GameManager : MonoBehaviour
         {
             Pickups[type].ForEach(pickup => pickup.GetComponent<MoveLeft>().enabled = value);
         }
-        if (playerController != null)
-            playerController.enabled = value;
+        if (playerView != null)
+            playerView.enabled = value;
     }
 
     public void Restart()
