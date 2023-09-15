@@ -6,8 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoSigeltonGeneric<GameManager>
 {
-    private static GameManager instance;
-    public static GameManager Instance { get { return instance; } }
 
     [SerializeField]
     private PlayerView playerView;
