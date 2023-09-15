@@ -30,6 +30,10 @@ public class UIService : MonoSigeltonGeneric<UIService>
             if (type == PickupType.Heart)
                 ExtraLifeIcon.SetActive(true);
         };
+        EventService.Instance.ExtraLifeUsed += () =>
+        {
+            ExtraLifeIcon.SetActive(false);
+        };
     }
     private void OnDestroy()
     {
@@ -41,6 +45,10 @@ public class UIService : MonoSigeltonGeneric<UIService>
         {
             if (type == PickupType.Heart)
                 ExtraLifeIcon.SetActive(true);
+        };
+        EventService.Instance.ExtraLifeUsed -= () =>
+        {
+            ExtraLifeIcon.SetActive(false);
         };
     }
 }

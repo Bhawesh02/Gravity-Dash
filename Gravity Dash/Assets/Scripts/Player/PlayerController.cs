@@ -39,9 +39,9 @@ public class PlayerController
     {
         if (Model.ExtraLife)
         {
-
+            EventService.Instance.InvokeExtraLifeUsed();
             RespawnPlayer();
-            //UIService.Instance.ExtraLifeIcon.SetActive(false);
+            
             return;
         }
         EventService.Instance.InvokePlayerDied();
