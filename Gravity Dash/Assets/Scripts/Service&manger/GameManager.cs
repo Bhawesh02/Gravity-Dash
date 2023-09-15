@@ -37,6 +37,17 @@ public class GameManager : MonoSigeltonGeneric<GameManager>
     private void Start()
     {
         Speed = playerView.Controller.Model.Speed;
+        EventService.Instance.PlayerDied += () =>
+        {
+            SetMoveLeft(false);
+        };
+    }
+    private void OnDestroy()
+    {
+        EventService.Instance.PlayerDied -= () =>
+        {
+            SetMoveLeft(false);
+        };
     }
     public void SetMoveLeft(bool value)
     {

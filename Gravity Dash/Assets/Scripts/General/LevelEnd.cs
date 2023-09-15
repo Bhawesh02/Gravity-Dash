@@ -26,7 +26,7 @@ public class LevelEnd : MonoBehaviour
             Destroy(continueButton);
         }
         GameManager.Instance.SetMoveLeft(false);
-        playerView.LevelCompleteUI.SetActive(true);
+        EventService.Instance.InvokeLevelCompleted();
         playerView.enabled = false;
         
         if(curSceneName == ScenesManage.GetSceneName(Scenes.Level1))

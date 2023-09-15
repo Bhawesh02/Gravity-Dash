@@ -24,23 +24,7 @@ public class PickupController : MonoBehaviour
 
         if (playerView == null)
             return;
-        switch (type)
-        {
-            case PickupType.Heart:
-                playerView.Controller.Model.ExtraLife = true;
-                playerView.ExtraLifeIcon.SetActive(true);
-                break;
-            case PickupType.Checkpoint:
-                playerView.Controller.RecordLastPos();
-
-                break;
-            case PickupType.Meat:
-                playerView.Controller.IncreaseMass();
-                break;
-            default:
-                Debug.LogError("Pickup type not specified");
-                break;
-        }
+        EventService.Instance.InvokePickupCollected(type);
         GameManager.Instance.Pickups[type].Remove(gameObject);
         Destroy(gameObject);
     }
