@@ -12,9 +12,12 @@ public class UIService : MonoSigeltonGeneric<UIService>
     [SerializeField]
     private Button continueButton;
     [SerializeField]
-    private GameObject PlayerDeadUI;
+    private GameObject playerDeadUI;
     [SerializeField]
-    private GameObject ExtraLifeIcon;
+    private GameObject extraLifeIcon;
+    [SerializeField]
+    private GameObject levelCompleteUI;
+
 
     private void Start()
     {
@@ -23,32 +26,40 @@ public class UIService : MonoSigeltonGeneric<UIService>
         continueButton.onClick.AddListener(GameManager.Instance.NextLevel);
         EventService.Instance.PlayerDied += () =>
         {
-            PlayerDeadUI.SetActive(true);
+            playerDeadUI.SetActive(true);
         };
         EventService.Instance.PickupCollected += (type) =>
         {
             if (type == PickupType.Heart)
-                ExtraLifeIcon.SetActive(true);
+                extraLifeIcon.SetActive(true);
         };
         EventService.Instance.ExtraLifeUsed += () =>
         {
-            ExtraLifeIcon.SetActive(false);
+            extraLifeIcon.SetActive(false);
+        };
+        EventService.Instance.LevelCompleted += () =>
+        {
+            levelCompleteUI.SetActive(true);
         };
     }
     private void OnDestroy()
     {
         EventService.Instance.PlayerDied -= () =>
         {
-            PlayerDeadUI.SetActive(true);
+            playerDeadUI.SetActive(true);
         };
         EventService.Instance.PickupCollected -= (type) =>
         {
             if (type == PickupType.Heart)
-                ExtraLifeIcon.SetActive(true);
+                extraLifeIcon.SetActive(true);
         };
         EventService.Instance.ExtraLifeUsed -= () =>
         {
-            ExtraLifeIcon.SetActive(false);
+            extraLifeIcon.SetActive(false);
+        };
+        EventService.Instance.LevelCompleted -= () =>
+        {
+            levelCompleteUI.SetActive(true);
         };
     }
 }

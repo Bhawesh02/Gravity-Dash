@@ -3,7 +3,6 @@ using UnityEngine;
 public class PlayerView : MonoBehaviour
 {
    
-    public GameObject LevelCompleteUI;
     public Rigidbody2D PlayerRigidbody { get; private set; }
 
     public SpriteRenderer PlayerSpriteRenderer { get; private set; }

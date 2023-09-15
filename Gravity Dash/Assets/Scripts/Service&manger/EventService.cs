@@ -6,6 +6,7 @@ public class EventService : SingeltonGeneric<EventService>
     public event Action PlayerDied;
     public event Action<PickupType> PickupCollected;
     public event Action ExtraLifeUsed;
+    public event Action LevelCompleted;
     public void InvokePlayerDied()
     {
         PlayerDied?.Invoke();
@@ -16,5 +17,9 @@ public class EventService : SingeltonGeneric<EventService>
     public void InvokeExtraLifeUsed()
     {
         ExtraLifeUsed?.Invoke();
+    }
+    public void InvokeLevelCompleted()
+    {
+        LevelCompleted?.Invoke();
     }
 }

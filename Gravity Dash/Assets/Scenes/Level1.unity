@@ -2183,9 +2183,21 @@ PrefabInstance:
       value: LevelUI
       objectReference: {fileID: 0}
     - target: {fileID: 6101322147210580182, guid: 5def4d05e3db73142b39ee97fd500b74, type: 3}
+      propertyPath: playerDeadUI
+      value: 
+      objectReference: {fileID: 836383403}
+    - target: {fileID: 6101322147210580182, guid: 5def4d05e3db73142b39ee97fd500b74, type: 3}
       propertyPath: ExtraLifeIcon
       value: 
       objectReference: {fileID: 744314133}
+    - target: {fileID: 6101322147210580182, guid: 5def4d05e3db73142b39ee97fd500b74, type: 3}
+      propertyPath: extraLifeIcon
+      value: 
+      objectReference: {fileID: 744314133}
+    - target: {fileID: 6101322147210580182, guid: 5def4d05e3db73142b39ee97fd500b74, type: 3}
+      propertyPath: levelCompleteUI
+      value: 
+      objectReference: {fileID: 94991807}
     - target: {fileID: 6101322147210580183, guid: 5def4d05e3db73142b39ee97fd500b74, type: 3}
       propertyPath: m_Pivot.x
       value: 0
