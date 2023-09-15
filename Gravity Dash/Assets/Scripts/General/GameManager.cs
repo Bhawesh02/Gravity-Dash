@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoSigeltonGeneric<GameManager>
 {
     private static GameManager instance;
     public static GameManager Instance { get { return instance; } }
@@ -24,14 +24,9 @@ public class GameManager : MonoBehaviour
 
 
 
-    private void Awake()
+    protected override void Awake()
     {
-        if (instance == null)
-            instance = this;
-        else
-            Destroy(gameObject);
-
-        
+        base.Awake();
         Pickups = new();
         foreach (PickupType type in Enum.GetValues(typeof(PickupType)))
         {
