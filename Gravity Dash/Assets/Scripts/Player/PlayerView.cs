@@ -4,7 +4,6 @@ public class PlayerView : MonoBehaviour
 {
    
     public GameObject ExtraLifeIcon;
-    public GameObject playerDeadUI;
     public GameObject LevelCompleteUI;
     public Rigidbody2D PlayerRigidbody { get; private set; }
 

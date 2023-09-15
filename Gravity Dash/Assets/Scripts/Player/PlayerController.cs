@@ -43,8 +43,8 @@ public class PlayerController
             view.ExtraLifeIcon.SetActive(false);
             return;
         }
+        EventService.Instance.InvokePlayerDied();
         GameManager.Instance.SetMoveLeft(false);
-        view.playerDeadUI.SetActive(true);
     }
 
     public void RecordLastPos()
