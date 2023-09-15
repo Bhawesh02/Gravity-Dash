@@ -4,11 +4,7 @@ using UnityEngine;
 
 public class PlayerView : MonoBehaviour
 {
-    public int increaceMassDuration = 5;
-    public int massChange = 5;
-    public float Speed;
-    public bool OnGround;
-    public bool ExtraLife = false;
+   
     public GameObject ExtraLifeIcon;
     public GameObject playerDeadUI;
     public GameObject LevelCompleteUI;
@@ -19,19 +15,7 @@ public class PlayerView : MonoBehaviour
     public Animator PlayerAnimator { get; private set; }
 
 
-    public Vector3 lastPlayerPos;
-
-    public List<Vector3> lastPlatformPos = new();
-
-
-    public Vector3 lastBackgroundPos;
-    public Vector3 lastGameEndPos;
-
-    public float lastGravityScale;
-
-    public bool lastFlipY;
-
-    public Dictionary<GameObject, Vector3> PickupsLastPos = new();
+    public PlayerScriptableObject PlayerScriptableObject;
 
     public PlayerController Controller { get; private set; }
 
@@ -40,15 +24,16 @@ public class PlayerView : MonoBehaviour
         PlayerRigidbody = GetComponent<Rigidbody2D>();
         PlayerSpriteRenderer = GetComponent<SpriteRenderer>();
         PlayerAnimator = GetComponent<Animator>();
-
+        Controller = new(this, PlayerScriptableObject);
     }
     private void Start()
     {
+        
         for (int i = 0; i < GameManager.Instance.Platforms.Count; i++)
         {
-            lastPlatformPos.Add(GameManager.Instance.Platforms[i].transform.position);
+            Controller.Model.LastPlatformPos.Add(GameManager.Instance.Platforms[i].transform.position);
         }
-        Controller = new(this);
+        
     }
 
     private void Update()
