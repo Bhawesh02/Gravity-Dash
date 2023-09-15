@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -40,11 +41,10 @@ public class PlayerController
         {
 
             RespawnPlayer();
-            view.ExtraLifeIcon.SetActive(false);
+            //UIService.Instance.ExtraLifeIcon.SetActive(false);
             return;
         }
         EventService.Instance.InvokePlayerDied();
-        GameManager.Instance.SetMoveLeft(false);
     }
 
     public void RecordLastPos()
@@ -116,5 +116,24 @@ public class PlayerController
     {
         yield return new WaitForSeconds(Model.IncreaseMassDuration);
         view.PlayerRigidbody.mass /= Model.MassChange;
+    }
+
+    public void PickupColledted(PickupType type)
+    {
+        switch (type)
+        {
+            case PickupType.Heart:
+                Model.ExtraLife = true;
+                break;
+            case PickupType.Checkpoint:
+                RecordLastPos();
+                break;
+            case PickupType.Meat:
+                IncreaseMass();
+                break;
+            default:
+                Debug.LogError("Pickup type not specified");
+                break;
+        }
     }
 }

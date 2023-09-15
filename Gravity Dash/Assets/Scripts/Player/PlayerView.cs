@@ -3,7 +3,6 @@ using UnityEngine;
 public class PlayerView : MonoBehaviour
 {
    
-    public GameObject ExtraLifeIcon;
     public GameObject LevelCompleteUI;
     public Rigidbody2D PlayerRigidbody { get; private set; }
 
@@ -30,9 +29,13 @@ public class PlayerView : MonoBehaviour
         {
             Controller.Model.LastPlatformPos.Add(GameManager.Instance.Platforms[i].transform.position);
         }
-        
+        EventService.Instance.PickupCollected += Controller.PickupColledted;
     }
+    private void OnDestroy()
+    {
+        EventService.Instance.PickupCollected -= Controller.PickupColledted;
 
+    }
     private void Update()
     {
         Controller.GravitySwitch();

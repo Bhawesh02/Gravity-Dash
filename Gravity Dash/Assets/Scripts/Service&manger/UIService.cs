@@ -13,6 +13,8 @@ public class UIService : MonoSigeltonGeneric<UIService>
     private Button continueButton;
     [SerializeField]
     private GameObject PlayerDeadUI;
+    [SerializeField]
+    private GameObject ExtraLifeIcon;
 
     private void Start()
     {
@@ -22,6 +24,23 @@ public class UIService : MonoSigeltonGeneric<UIService>
         EventService.Instance.PlayerDied += () =>
         {
             PlayerDeadUI.SetActive(true);
+        };
+        EventService.Instance.PickupCollected += (type) =>
+        {
+            if (type == PickupType.Heart)
+                ExtraLifeIcon.SetActive(true);
+        };
+    }
+    private void OnDestroy()
+    {
+        EventService.Instance.PlayerDied -= () =>
+        {
+            PlayerDeadUI.SetActive(true);
+        };
+        EventService.Instance.PickupCollected -= (type) =>
+        {
+            if (type == PickupType.Heart)
+                ExtraLifeIcon.SetActive(true);
         };
     }
 }
