@@ -27,7 +27,7 @@ public class PickupController : MonoBehaviour
         switch (type)
         {
             case PickupType.Heart:
-                playerView.ExtraLife = true;
+                playerView.Controller.Model.ExtraLife = true;
                 playerView.ExtraLifeIcon.SetActive(true);
                 break;
             case PickupType.Checkpoint:

@@ -5,9 +5,11 @@ using UnityEngine;
 public class PlayerController 
 {
     private PlayerView view;
-    public PlayerController(PlayerView playerView)
+    public PlayerModel Model { get; }
+    public PlayerController(PlayerView playerView, PlayerScriptableObject playerScriptableObject)
     {
         view = playerView;
+        Model = new(playerScriptableObject);
     }
 
     public void OnGroundCheck()
@@ -15,12 +17,12 @@ public class PlayerController
         if (view.PlayerRigidbody.velocity.y != 0)
         {
             view.PlayerAnimator.SetBool("OnGround", false);
-            view.OnGround = false;
+            Model.OnGround = false;
         }
         else
         {
             view.PlayerAnimator.SetBool("OnGround", true);
-            view.OnGround = true;
+            Model.OnGround = true;
         }
     }
 
@@ -34,7 +36,7 @@ public class PlayerController
     }
     public void PlayerDead()
     {
-        if (view.ExtraLife)
+        if (Model.ExtraLife)
         {
 
             RespawnPlayer();
@@ -47,22 +49,22 @@ public class PlayerController
 
     public void RecordLastPos()
     {
-        if (!view.OnGround && view.lastPlayerPos != Vector3.zero)
+        if (!Model.OnGround && Model.LastPlayerPos != Vector3.zero)
             return;
-        view.lastPlayerPos = view.gameObject.transform.position;
-        view.lastGravityScale = view.PlayerRigidbody.gravityScale;
-        view.lastFlipY = view.PlayerSpriteRenderer.flipY;
+        Model.LastPlayerPos = view.gameObject.transform.position;
+        Model.LastGravityScale = view.PlayerRigidbody.gravityScale;
+        Model.LastFlipY = view.PlayerSpriteRenderer.flipY;
 
-        view.lastBackgroundPos = GameManager.Instance.BackgroundMove.gameObject.transform.position;
+        Model.LastBackgroundPos = GameManager.Instance.BackgroundMove.gameObject.transform.position;
         for (int i = 0; i < GameManager.Instance.Platforms.Count; i++)
         {
-            view.lastPlatformPos[i] = GameManager.Instance.Platforms[i].transform.position;
+            Model.LastPlatformPos[i] = GameManager.Instance.Platforms[i].transform.position;
         }
         foreach (var type in GameManager.Instance.Pickups)
         {
             type.Value.ForEach(gameObj => RecordPickupPosition(gameObj));
         }
-        view.lastGameEndPos = GameManager.Instance.GameEnd.transform.position;
+        Model.LastGameEndPos = GameManager.Instance.GameEnd.transform.position;
     }
 
 
@@ -70,49 +72,49 @@ public class PlayerController
     {
         if (gameObj == null)
             return;
-        if (view.PickupsLastPos.ContainsKey(gameObj))
-            view.PickupsLastPos[gameObj] = gameObj.transform.position;
+        if (Model.PickupsLastPos.ContainsKey(gameObj))
+            Model.PickupsLastPos[gameObj] = gameObj.transform.position;
         else
-            view.PickupsLastPos.Add(gameObj, gameObj.transform.position);
+            Model.PickupsLastPos.Add(gameObj, gameObj.transform.position);
     }
 
     private void RespawnPlayer()
     {
 
 
-        GameManager.Instance.BackgroundMove.gameObject.transform.position = view.lastBackgroundPos;
+        GameManager.Instance.BackgroundMove.gameObject.transform.position = Model.LastBackgroundPos;
         for (int i = 0; i < GameManager.Instance.Platforms.Count; i++)
         {
-            GameManager.Instance.Platforms[i].transform.position = view.lastPlatformPos[i];
+            GameManager.Instance.Platforms[i].transform.position = Model    .LastPlatformPos[i];
         }
         foreach (var type in GameManager.Instance.Pickups)
         {
             type.Value.ForEach(gameObj => ReloadPickupPosition(gameObj));
         }
-        view.PlayerRigidbody.gravityScale = view.lastGravityScale;
-        view.PlayerSpriteRenderer.flipY = view.lastFlipY;
+        view.PlayerRigidbody.gravityScale = Model.LastGravityScale;
+        view.PlayerSpriteRenderer.flipY = Model.LastFlipY;
         view.PlayerRigidbody.velocity = new(0, 0);
-        view.gameObject.transform.position = view.lastPlayerPos;
-        GameManager.Instance.GameEnd.transform.position = view.lastGameEndPos;
+        view.gameObject.transform.position = Model.LastPlayerPos;
+        GameManager.Instance.GameEnd.transform.position = Model.LastGameEndPos;
 
-        view.ExtraLife = false;
+        Model.ExtraLife = false;
 
     }
     private void ReloadPickupPosition(GameObject gameObj)
     {
         if (gameObj == null)
             return;
-        gameObj.transform.position = view.PickupsLastPos[gameObj];
+        gameObj.transform.position = Model.PickupsLastPos[gameObj];
     }
     public void IncreaseMass()
     {
-        view.PlayerRigidbody.mass *= view.massChange;
+        view.PlayerRigidbody.mass *= Model.MassChange;
         view.StartCoroutine(ReduceMass());
     }
 
     IEnumerator ReduceMass()
     {
-        yield return new WaitForSeconds(view.increaceMassDuration);
-        view.PlayerRigidbody.mass /= view.massChange;
+        yield return new WaitForSeconds(Model.IncreaseMassDuration);
+        view.PlayerRigidbody.mass /= Model.MassChange;
     }
 }

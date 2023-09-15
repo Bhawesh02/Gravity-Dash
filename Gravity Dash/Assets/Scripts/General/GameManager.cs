@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
         else
             Destroy(gameObject);
 
-        Speed = playerView.Speed;
+        
         Pickups = new();
         foreach (PickupType type in Enum.GetValues(typeof(PickupType)))
         {
@@ -39,7 +39,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
+    private void Start()
+    {
+        Speed = playerView.Controller.Model.Speed;
+    }
     public void SetMoveLeft(bool value)
     {
         Platforms.ForEach(platform => platform.GetComponent<MoveLeft>().enabled = value);
