@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelUIController : MonoBehaviour
+public class UIService : MonoBehaviour
 {
     [SerializeField]
     private List<Button> restartButtons;
@@ -11,7 +11,8 @@ public class LevelUIController : MonoBehaviour
     private List<Button> lobbyButtons;
     [SerializeField]
     private Button continueButton;
-
+    [SerializeField]
+    private GameObject PlayerDeadUI;
     private void Start()
     {
         restartButtons.ForEach(btn=>btn.onClick.AddListener(GameManager.Instance.Restart));
