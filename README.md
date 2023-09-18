@@ -16,3 +16,42 @@ The Gravity Dash game is a 2D platformer developed in Unity. The project include
 - **Code Structure:** Modular scripting, scene transitions, and data persistence.
 - **Gameplay Enhancement:** Engaging mechanics, level design, and interactive elements.
 
+## Coding Architecture
+
+### MVC (Model-View-Controller) Architecture
+
+The project follows the MVC architectural pattern, which separates the application into three interconnected components:
+
+- **Model**: Represents the game's data and business logic. Includes classes for the player, pickups, and game state.
+
+- **View**: Handles the visual aspects of the game, such as UI elements, player animations, and rendering. The `PlayerView` script, for example, manages the player's visual components.
+
+- **Controller**: Controls the game's behaviour and user input. The `PlayerController` script, for instance, manages the player's actions and interactions.
+
+### Singleton Pattern
+
+Several components in the project, such as the `GameManager`, `EventService`, and `UIService`, implement the Singleton pattern:
+
+- **GameManager**: Manages game state, scene transitions, and game elements such as platforms and pickups.
+
+- **EventService**: Handles game events like player death, pickup collection, and level completion using events and delegates.
+
+- **UIService**: Manages user interface elements and their interactions, including restart buttons, lobby buttons, and level completion UI.
+
+### Observer Pattern
+
+The Observer pattern is utilized through the EventService. It allows decoupled components to subscribe to and respond to events triggered by other parts of the game. For instance:
+
+- Subscribing to the `PlayerDied` event displays the player death UI.
+- Subscribing to the `PickupCollected` event updates UI elements and triggers game effects.
+- Subscribing to the `LevelCompleted` event displays level completion UI.
+
+### Scriptable Object
+
+Scriptable Objects are used to store and manage game data and configurations:
+
+- **PlayerScriptableObject**: Contains player-related configuration data such as speed, mass change, and increased mass duration. This allows for easy tuning and balancing of player mechanics.
+
+---
+
+
