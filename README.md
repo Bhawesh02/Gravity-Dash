@@ -57,6 +57,10 @@ Scriptable Objects are used to store and manage game data and configurations:
 [Video](https://www.loom.com/share/e7169c94b1c049009b688c6eddc358ef)
 
 ### Screen Shots
+![image](https://github.com/Bhawesh02/Gravity-Dash/assets/93391124/46a9146c-480b-43c7-b616-a2d28413bc4d)
+![image](https://github.com/Bhawesh02/Gravity-Dash/assets/93391124/8594d2c1-78a3-445b-a847-6cc7a6a938a7)
+![image](https://github.com/Bhawesh02/Gravity-Dash/assets/93391124/db87be44-2d99-4899-baf5-672b5404747f)
+![image](https://github.com/Bhawesh02/Gravity-Dash/assets/93391124/a971d5fc-26d9-45c8-8452-5ce3643166d2)
 
 
 
