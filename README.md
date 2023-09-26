@@ -52,6 +52,14 @@ Scriptable Objects are used to store and manage game data and configurations:
 
 - **PlayerScriptableObject**: Contains player-related configuration data such as speed, mass change, and increased mass duration. This allows for easy tuning and balancing of player mechanics.
 
+## GamePlay
+
+[Video](https://www.loom.com/share/e7169c94b1c049009b688c6eddc358ef)
+
+### Screen Shots
+
+
+
 ---
 
 
